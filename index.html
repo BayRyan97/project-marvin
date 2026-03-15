@@ -562,6 +562,44 @@
     padding: 0;
   }
 
+  /* Language Toggle Button */
+  .lang-toggle {
+    position: fixed;
+    top: 20px;
+    right: 78px;
+    height: 44px;
+    padding: 0 16px;
+    border: 1px solid rgba(244,240,232,0.25);
+    background: rgba(244,240,232,0.03);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+
+  .lang-toggle:hover {
+    background: rgba(244,240,232,0.08);
+    border-color: rgba(244,240,232,0.4);
+  }
+
+  body.light-theme .lang-toggle {
+    border: 1px solid rgba(26,24,20,0.25);
+    background: rgba(26,24,20,0.03);
+  }
+
+  body.light-theme .lang-toggle:hover {
+    background: rgba(26,24,20,0.08);
+    border-color: rgba(26,24,20,0.4);
+  }
+
   .theme-toggle:hover {
     background: rgba(244,240,232,0.08);
     border-color: rgba(244,240,232,0.4);
@@ -857,6 +895,10 @@
 </head>
 <body>
 
+<button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+  <span class="lang-text">ES</span>
+</button>
+
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
   <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="12" cy="12" r="5"/>
@@ -875,26 +917,26 @@
 </button>
 
 <div class="wrap">
-  <div class="name">Free <span>Marvin</span> Mendez Ochoa</div>
+  <div class="name" data-en="Free Marvin Mendez Ochoa" data-es="Liberen a Marvin Mendez Ochoa">Free <span>Marvin</span> Mendez Ochoa</div>
   <div class="a-number">A-Number: 098-044-927 &nbsp;·&nbsp; projectmarvin.io</div>
 
-  <div class="clock-label">Time separated from his family</div>
+  <div class="clock-label" data-en="Time separated from his family" data-es="Tiempo separado de su familia">Time separated from his family</div>
   <div class="clock">
-    <div class="clock-unit"><span class="num" id="d">00</span><span class="lbl">Days</span></div>
+    <div class="clock-unit"><span class="num" id="d">00</span><span class="lbl" data-en="Days" data-es="Días">Days</span></div>
     <span class="clock-sep">:</span>
-    <div class="clock-unit"><span class="num" id="h">00</span><span class="lbl">Hours</span></div>
+    <div class="clock-unit"><span class="num" id="h">00</span><span class="lbl" data-en="Hours" data-es="Horas">Hours</span></div>
     <span class="clock-sep">:</span>
-    <div class="clock-unit"><span class="num" id="m">00</span><span class="lbl">Minutes</span></div>
+    <div class="clock-unit"><span class="num" id="m">00</span><span class="lbl" data-en="Minutes" data-es="Minutos">Minutes</span></div>
     <span class="clock-sep">:</span>
-    <div class="clock-unit"><span class="num" id="s">00</span><span class="lbl">Seconds</span></div>
+    <div class="clock-unit"><span class="num" id="s">00</span><span class="lbl" data-en="Seconds" data-es="Segundos">Seconds</span></div>
   </div>
 
   <div class="divider"></div>
 
-  <p class="blurb">
+  <p class="blurb" data-en="On March 12, 2026, Marvin Mendez Ochoa — a husband, a father of three, and a member of this community for over 20 years — was taken into federal custody without warning." data-es="El 12 de marzo de 2026, Marvin Mendez Ochoa — esposo, padre de tres hijos y miembro de esta comunidad por más de 20 años — fue detenido por autoridades federales sin previo aviso.">
     On March 12, 2026, Marvin Mendez Ochoa — a husband, a father of three, and a member of this community for over 20 years — was taken into federal custody without warning.
   </p>
-  <p class="sub">
+  <p class="sub" data-en="His wife is a U.S. citizen. His children were born here. They go to school here. This is the only country they know. Marvin built a life, a home, and a family in America — and he deserves to be in it." data-es="Su esposa es ciudadana estadounidense. Sus hijos nacieron aquí. Van a la escuela aquí. Este es el único país que conocen. Marvin construyó una vida, un hogar y una familia en Estados Unidos — y merece estar en ella.">
     His wife is a U.S. citizen. His children were born here. They go to school here. This is the only country they know. Marvin built a life, a home, and a family in America — and he deserves to be in it.
   </p>
 </div>
@@ -902,9 +944,9 @@
 <!-- MAP SECTION -->
 <section class="map-section">
   <div class="map-header">
-    <div class="map-eyebrow">Detention Record</div>
-    <div class="map-title">Where They Took Him</div>
-    <div class="map-subtitle">From a routine meeting on Long Island to a federal facility in Newark — in under 30 hours</div>
+    <div class="map-eyebrow" data-en="Detention Record" data-es="Registro de Detención">Detention Record</div>
+    <div class="map-title" data-en="Where They Took Him" data-es="Dónde Lo Llevaron">Where They Took Him</div>
+    <div class="map-subtitle" data-en="From a routine meeting on Long Island to a federal facility in Newark — in under 30 hours" data-es="De una reunión de rutina en Long Island a una instalación federal en Newark — en menos de 30 horas">From a routine meeting on Long Island to a federal facility in Newark — in under 30 hours</div>
   </div>
 
   <div id="map"></div>
@@ -949,40 +991,40 @@
 
 <!-- SHARE YOUR STORY SECTION -->
 <section class="story-section">
-  <div class="story-eyebrow">Community Voices</div>
-  <div class="story-title">Share Your Story</div>
-  <div class="story-subtitle">Know Marvin? Share how he's impacted your life, your neighborhood, or your community.</div>
+  <div class="story-eyebrow" data-en="Community Voices" data-es="Voces de la Comunidad">Community Voices</div>
+  <div class="story-title" data-en="Share Your Story" data-es="Comparte Tu Historia">Share Your Story</div>
+  <div class="story-subtitle" data-en="Know Marvin? Share how he's impacted your life, your neighborhood, or your community." data-es="¿Conoces a Marvin? Comparte cómo ha impactado tu vida, tu vecindario o tu comunidad.">Know Marvin? Share how he's impacted your life, your neighborhood, or your community.</div>
 
   <form class="story-form" id="storyForm" action="https://formspree.io/f/xeerlbnr" method="POST">
     <div class="form-group">
-      <label class="form-label" for="name">Your Name (Optional)</label>
-      <input class="form-input" type="text" id="name" name="name" placeholder="How should we know you?">
+      <label class="form-label" for="name" data-en="Your Name (Optional)" data-es="Tu Nombre (Opcional)">Your Name (Optional)</label>
+      <input class="form-input" type="text" id="name" name="name" data-placeholder-en="How should we know you?" data-placeholder-es="¿Cómo deberíamos conocerte?" placeholder="How should we know you?">
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="email">Your Email (Optional)</label>
-      <input class="form-input" type="email" id="email" name="email" placeholder="In case we want to follow up">
+      <label class="form-label" for="email" data-en="Your Email (Optional)" data-es="Tu Correo (Opcional)">Your Email (Optional)</label>
+      <input class="form-input" type="email" id="email" name="email" data-placeholder-en="In case we want to follow up" data-placeholder-es="En caso de que queramos hacer seguimiento" placeholder="In case we want to follow up">
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="relationship">Your Connection to Marvin</label>
+      <label class="form-label" for="relationship" data-en="Your Connection to Marvin" data-es="Tu Conexión con Marvin">Your Connection to Marvin</label>
       <select class="form-select" id="relationship" name="relationship" required>
-        <option value="">Select one...</option>
-        <option value="Friend">Friend</option>
-        <option value="Neighbor">Neighbor</option>
-        <option value="Coworker">Coworker</option>
-        <option value="Community Member">Community Member</option>
-        <option value="Family">Family</option>
-        <option value="Other">Other</option>
+        <option value="" data-en="Select one..." data-es="Selecciona una...">Select one...</option>
+        <option value="Friend" data-en="Friend" data-es="Amigo/a">Friend</option>
+        <option value="Neighbor" data-en="Neighbor" data-es="Vecino/a">Neighbor</option>
+        <option value="Coworker" data-en="Coworker" data-es="Compañero/a de Trabajo">Coworker</option>
+        <option value="Community Member" data-en="Community Member" data-es="Miembro de la Comunidad">Community Member</option>
+        <option value="Family" data-en="Family" data-es="Familia">Family</option>
+        <option value="Other" data-en="Other" data-es="Otro">Other</option>
       </select>
     </div>
 
     <div class="form-group">
-      <label class="form-label" for="story">Your Story *</label>
-      <textarea class="form-textarea" id="story" name="story" required placeholder="Tell us about Marvin. How do you know him? What kind of person is he? How has his detention affected you or your community?"></textarea>
+      <label class="form-label" for="story" data-en="Your Story *" data-es="Tu Historia *">Your Story *</label>
+      <textarea class="form-textarea" id="story" name="story" required data-placeholder-en="Tell us about Marvin. How do you know him? What kind of person is he? How has his detention affected you or your community?" data-placeholder-es="Cuéntanos sobre Marvin. ¿Cómo lo conoces? ¿Qué tipo de persona es? ¿Cómo ha afectado su detención a ti o a tu comunidad?" placeholder="Tell us about Marvin. How do you know him? What kind of person is he? How has his detention affected you or your community?"></textarea>
     </div>
 
-    <button class="form-submit" type="submit">Submit Your Story</button>
+    <button class="form-submit" type="submit" data-en="Submit Your Story" data-es="Enviar Tu Historia">Submit Your Story</button>
     
     <div class="form-status" id="formStatus"></div>
   </form>
@@ -990,26 +1032,26 @@
 
 <!-- HOW CAN I HELP SECTION -->
 <section class="help-section">
-  <div class="help-eyebrow">Take Action</div>
-  <div class="help-title">How else can I help</div>
-  <div class="help-subtitle">Three ways you can make a difference right now</div>
+  <div class="help-eyebrow" data-en="Take Action" data-es="Toma Acción">Take Action</div>
+  <div class="help-title" data-en="How else can I help" data-es="¿Cómo más puedo ayudar?">How else can I help</div>
+  <div class="help-subtitle" data-en="Three ways you can make a difference right now" data-es="Tres formas en las que puedes hacer una diferencia ahora mismo">Three ways you can make a difference right now</div>
 
   <div class="help-actions">
     
     <!-- Card 1: Contact Reps -->
     <div class="help-card">
-      <div class="help-card-label">Call · Write</div>
-      <div class="help-card-title">Contact Your Representatives</div>
-      <div class="help-card-desc">Find your local representatives and urge them to intervene in Marvin's case.</div>
-      <a href="https://democracy.io/#!/" target="_blank" rel="noopener" class="help-btn">Find My Reps</a>
+      <div class="help-card-label" data-en="Call · Write" data-es="Llama · Escribe">Call · Write</div>
+      <div class="help-card-title" data-en="Contact Your Representatives" data-es="Contacta a Tus Representantes">Contact Your Representatives</div>
+      <div class="help-card-desc" data-en="Find your local representatives and urge them to intervene in Marvin's case." data-es="Encuentra a tus representantes locales y pídeles que intervengan en el caso de Marvin.">Find your local representatives and urge them to intervene in Marvin's case.</div>
+      <a href="https://democracy.io/#!/" target="_blank" rel="noopener" class="help-btn" data-en="Find My Reps" data-es="Encuentra Mis Representantes">Find My Reps</a>
     </div>
 
     <!-- Card 2: Email Template -->
     <div class="help-card">
-      <div class="help-card-label">Email</div>
-      <div class="help-card-title">Send an Email</div>
-      <div class="help-card-desc">Use this template to email representatives and ICE officials on Marvin's behalf.</div>
-      <button class="help-btn" onclick="toggleEmail()">View Template</button>
+      <div class="help-card-label" data-en="Email" data-es="Correo">Email</div>
+      <div class="help-card-title" data-en="Send an Email" data-es="Envía un Correo">Send an Email</div>
+      <div class="help-card-desc" data-en="Use this template to email representatives and ICE officials on Marvin's behalf." data-es="Usa esta plantilla para enviar correos a representantes y oficiales de ICE en nombre de Marvin.">Use this template to email representatives and ICE officials on Marvin's behalf.</div>
+      <button class="help-btn" onclick="toggleEmail()" data-en="View Template" data-es="Ver Plantilla">View Template</button>
       
       <div class="email-template" id="emailTemplate">
         <textarea id="emailText" readonly>Subject: Urgent Request for Release — Marvin Mendez Ochoa (A# 098-044-927)
@@ -1038,24 +1080,24 @@ Thank you for your time and consideration.
 Sincerely,
 [Your Name]
 [Your City, State]</textarea>
-        <button class="copy-btn" onclick="copyEmail()">Copy to Clipboard</button>
+        <button class="copy-btn" onclick="copyEmail()" data-en="Copy to Clipboard" data-es="Copiar al Portapapeles">Copy to Clipboard</button>
       </div>
     </div>
 
     <!-- Card 3: Donate (Coming Soon) -->
     <div class="help-card">
-      <div class="help-card-label">Support</div>
-      <div class="help-card-title">Support This Effort</div>
-      <div class="help-card-desc">Legal fees, family support, and advocacy costs. Every bit helps.</div>
-      <button class="help-btn coming-soon">Coming Soon</button>
+      <div class="help-card-label" data-en="Support" data-es="Apoya">Support</div>
+      <div class="help-card-title" data-en="Support This Effort" data-es="Apoya Este Esfuerzo">Support This Effort</div>
+      <div class="help-card-desc" data-en="Legal fees, family support, and advocacy costs. Every bit helps." data-es="Honorarios legales, apoyo familiar y costos de defensa. Cada aporte ayuda.">Legal fees, family support, and advocacy costs. Every bit helps.</div>
+      <button class="help-btn coming-soon" data-en="Coming Soon" data-es="Próximamente">Coming Soon</button>
     </div>
 
   </div>
 </section>
 
 <div class="foot">
-  projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends
-  <span class="foot-updated">Last updated: March 15, 2026</span>
+  <span data-en="projectmarvin.io · maintained by his family & friends" data-es="projectmarvin.io · mantenido por su familia y amigos">projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends</span>
+  <span class="foot-updated" data-en="Last updated: March 15, 2026" data-es="Última actualización: 15 de marzo de 2026">Last updated: March 15, 2026</span>
 </div>
 
 </div>
@@ -1078,6 +1120,48 @@ Sincerely,
   }
   tick();
   setInterval(tick, 1000);
+
+  // LANGUAGE TOGGLE
+  const savedLang = localStorage.getItem('language') || 'en';
+  let currentLang = savedLang;
+
+  function setLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('language', lang);
+    document.documentElement.lang = lang;
+    
+    // Update all elements with data-en and data-es attributes
+    document.querySelectorAll('[data-en]').forEach(el => {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = el.getAttribute(`data-placeholder-${lang}`);
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = el.getAttribute(`data-${lang}`);
+      } else {
+        const text = el.getAttribute(`data-${lang}`);
+        if (el.classList.contains('name')) {
+          // Special handling for the name to keep the span tag
+          if (lang === 'en') {
+            el.innerHTML = 'Free <span>Marvin</span> Mendez Ochoa';
+          } else {
+            el.innerHTML = 'Liberen a <span>Marvin</span> Mendez Ochoa';
+          }
+        } else {
+          el.textContent = text;
+        }
+      }
+    });
+    
+    // Update language button
+    document.querySelector('.lang-text').textContent = lang === 'en' ? 'ES' : 'EN';
+  }
+
+  // Initialize language on load
+  setLanguage(currentLang);
+
+  // Language toggle button
+  document.getElementById('langToggle').addEventListener('click', () => {
+    setLanguage(currentLang === 'en' ? 'es' : 'en');
+  });
 
   // EMAIL TEMPLATE
   function toggleEmail() {
