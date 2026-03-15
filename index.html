@@ -571,7 +571,7 @@
     top: 20px;
     right: 78px;
     height: 44px;
-    padding: 0 16px;
+    padding: 0;
     border: 1px solid rgba(244,240,232,0.25);
     background: rgba(244,240,232,0.03);
     color: var(--paper);
@@ -583,13 +583,40 @@
     justify-content: center;
     backdrop-filter: blur(8px);
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     letter-spacing: 0.08em;
     font-weight: 500;
+    overflow: hidden;
+  }
+
+  .lang-option {
+    padding: 0 12px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    opacity: 0.5;
+    position: relative;
+  }
+
+  .lang-option.active {
+    opacity: 1;
+    background: rgba(244,240,232,0.08);
+  }
+
+  .lang-option:not(.active):hover {
+    opacity: 0.8;
+    background: rgba(244,240,232,0.04);
+  }
+
+  .lang-separator {
+    width: 1px;
+    height: 20px;
+    background: rgba(244,240,232,0.2);
   }
 
   .lang-toggle:hover {
-    background: rgba(244,240,232,0.08);
     border-color: rgba(244,240,232,0.4);
   }
 
@@ -598,8 +625,19 @@
     background: rgba(26,24,20,0.03);
   }
 
-  body.light-theme .lang-toggle:hover {
+  body.light-theme .lang-option.active {
     background: rgba(26,24,20,0.08);
+  }
+
+  body.light-theme .lang-option:not(.active):hover {
+    background: rgba(26,24,20,0.04);
+  }
+
+  body.light-theme .lang-separator {
+    background: rgba(26,24,20,0.2);
+  }
+
+  body.light-theme .lang-toggle:hover {
     border-color: rgba(26,24,20,0.4);
   }
 
@@ -899,7 +937,9 @@
 <body>
 
 <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
-  <span class="lang-text">ES</span>
+  <span class="lang-option" data-lang="en">EN</span>
+  <span class="lang-separator"></span>
+  <span class="lang-option" data-lang="es">ES</span>
 </button>
 
 <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
@@ -1146,16 +1186,22 @@ Sincerely,
       }
     });
     
-    // Update language button
-    document.querySelector('.lang-text').textContent = lang === 'en' ? 'ES' : 'EN';
+    // Update language button active state
+    document.querySelectorAll('.lang-option').forEach(opt => {
+      opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+    });
   }
 
   // Initialize language on load
   setLanguage(currentLang);
 
-  // Language toggle button
-  document.getElementById('langToggle').addEventListener('click', () => {
-    setLanguage(currentLang === 'en' ? 'es' : 'en');
+  // Language toggle button - click on individual options
+  document.querySelectorAll('.lang-option').forEach(opt => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const lang = opt.getAttribute('data-lang');
+      setLanguage(lang);
+    });
   });
 
   // EMAIL TEMPLATE
