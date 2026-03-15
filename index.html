@@ -947,10 +947,51 @@
   </div>
 </section>
 
+<!-- SHARE YOUR STORY SECTION -->
+<section class="story-section">
+  <div class="story-eyebrow">Community Voices</div>
+  <div class="story-title">Share Your Story</div>
+  <div class="story-subtitle">Know Marvin? Share how he's impacted your life, your neighborhood, or your community.</div>
+
+  <form class="story-form" id="storyForm" action="https://formspree.io/f/xeerlbnr" method="POST">
+    <div class="form-group">
+      <label class="form-label" for="name">Your Name (Optional)</label>
+      <input class="form-input" type="text" id="name" name="name" placeholder="How should we know you?">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="email">Your Email (Optional)</label>
+      <input class="form-input" type="email" id="email" name="email" placeholder="In case we want to follow up">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="relationship">Your Connection to Marvin</label>
+      <select class="form-select" id="relationship" name="relationship" required>
+        <option value="">Select one...</option>
+        <option value="Friend">Friend</option>
+        <option value="Neighbor">Neighbor</option>
+        <option value="Coworker">Coworker</option>
+        <option value="Community Member">Community Member</option>
+        <option value="Family">Family</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="story">Your Story *</label>
+      <textarea class="form-textarea" id="story" name="story" required placeholder="Tell us about Marvin. How do you know him? What kind of person is he? How has his detention affected you or your community?"></textarea>
+    </div>
+
+    <button class="form-submit" type="submit">Submit Your Story</button>
+    
+    <div class="form-status" id="formStatus"></div>
+  </form>
+</section>
+
 <!-- HOW CAN I HELP SECTION -->
 <section class="help-section">
   <div class="help-eyebrow">Take Action</div>
-  <div class="help-title">How Can I Help</div>
+  <div class="help-title">How else can I help</div>
   <div class="help-subtitle">Three ways you can make a difference right now</div>
 
   <div class="help-actions">
@@ -1010,47 +1051,6 @@ Sincerely,
     </div>
 
   </div>
-</section>
-
-<!-- SHARE YOUR STORY SECTION -->
-<section class="story-section">
-  <div class="story-eyebrow">Community Voices</div>
-  <div class="story-title">Share Your Story</div>
-  <div class="story-subtitle">Know Marvin? Share how he's impacted your life, your neighborhood, or your community.</div>
-
-  <form class="story-form" id="storyForm" action="https://formspree.io/f/xeerlbnr" method="POST">
-    <div class="form-group">
-      <label class="form-label" for="name">Your Name (Optional)</label>
-      <input class="form-input" type="text" id="name" name="name" placeholder="How should we know you?">
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="email">Your Email (Optional)</label>
-      <input class="form-input" type="email" id="email" name="email" placeholder="In case we want to follow up">
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="relationship">Your Connection to Marvin</label>
-      <select class="form-select" id="relationship" name="relationship" required>
-        <option value="">Select one...</option>
-        <option value="Friend">Friend</option>
-        <option value="Neighbor">Neighbor</option>
-        <option value="Coworker">Coworker</option>
-        <option value="Community Member">Community Member</option>
-        <option value="Family">Family</option>
-        <option value="Other">Other</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label" for="story">Your Story *</label>
-      <textarea class="form-textarea" id="story" name="story" required placeholder="Tell us about Marvin. How do you know him? What kind of person is he? How has his detention affected you or your community?"></textarea>
-    </div>
-
-    <button class="form-submit" type="submit">Submit Your Story</button>
-    
-    <div class="form-status" id="formStatus"></div>
-  </form>
 </section>
 
 <div class="foot">
