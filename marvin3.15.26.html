@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
 <title>Free Marvin Mendez Ochoa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -348,6 +349,179 @@
     text-align: center;
     position: relative;
     z-index: 1;
+    line-height: 1.8;
+  }
+
+  .foot-updated {
+    opacity: 0.3;
+    font-size: 0.52rem;
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* HELP SECTION */
+  .help-section {
+    margin: 80px 0 0;
+    text-align: center;
+  }
+
+  .help-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 16px;
+  }
+
+  .help-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 4vw, 1.9rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+    color: var(--paper);
+    margin-bottom: 12px;
+  }
+
+  .help-subtitle {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(244,240,232,0.5);
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+
+  .help-actions {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 0;
+    text-align: left;
+  }
+
+  @media (min-width: 640px) {
+    .help-actions {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .help-card {
+    background: rgba(244,240,232,0.02);
+    border: 1px solid rgba(244,240,232,0.12);
+    padding: 28px 24px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .help-card:hover {
+    background: rgba(244,240,232,0.04);
+    border-color: rgba(244,240,232,0.2);
+  }
+
+  .help-card-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  .help-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--paper);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .help-card-desc {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.88rem;
+    color: rgba(244,240,232,0.6);
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+
+  .help-btn {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border: 1px solid rgba(244,240,232,0.3);
+    color: var(--paper);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .help-btn:hover {
+    background: rgba(244,240,232,0.08);
+    border-color: rgba(244,240,232,0.5);
+  }
+
+  .help-btn.coming-soon {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .email-template {
+    margin-top: 20px;
+    display: none;
+    text-align: left;
+  }
+
+  .email-template.active {
+    display: block;
+  }
+
+  .email-template textarea {
+    width: 100%;
+    min-height: 200px;
+    background: rgba(14,14,14,0.6);
+    border: 1px solid rgba(244,240,232,0.15);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    line-height: 1.6;
+    padding: 16px;
+    resize: vertical;
+    margin-bottom: 12px;
+  }
+
+  .email-template textarea:focus {
+    outline: none;
+    border-color: rgba(244,240,232,0.3);
+  }
+
+  .copy-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 1px solid rgba(244,240,232,0.25);
+    background: rgba(244,240,232,0.05);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .copy-btn:hover {
+    background: rgba(244,240,232,0.1);
+    border-color: rgba(244,240,232,0.4);
+  }
+
+  .copy-btn.copied {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--paper);
   }
 </style>
 </head>
@@ -426,7 +600,77 @@
   </div>
 </section>
 
-<div class="foot">projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends</div>
+<!-- HOW CAN I HELP SECTION -->
+<section class="help-section">
+  <div class="help-eyebrow">Take Action</div>
+  <div class="help-title">How Can I Help</div>
+  <div class="help-subtitle">Three ways you can make a difference right now</div>
+
+  <div class="help-actions">
+    
+    <!-- Card 1: Contact Reps -->
+    <div class="help-card">
+      <div class="help-card-label">Call · Write</div>
+      <div class="help-card-title">Contact Your Representatives</div>
+      <div class="help-card-desc">Find your local representatives and urge them to intervene in Marvin's case.</div>
+      <a href="https://democracy.io/#!/" target="_blank" rel="noopener" class="help-btn">Find My Reps</a>
+    </div>
+
+    <!-- Card 2: Email Template -->
+    <div class="help-card">
+      <div class="help-card-label">Email</div>
+      <div class="help-card-title">Send an Email</div>
+      <div class="help-card-desc">Use this template to email representatives and ICE officials on Marvin's behalf.</div>
+      <button class="help-btn" onclick="toggleEmail()">View Template</button>
+      
+      <div class="email-template" id="emailTemplate">
+        <textarea id="emailText" readonly>Subject: Urgent Request for Release — Marvin Mendez Ochoa (A# 098-044-927)
+
+Dear [Representative/Official Name],
+
+I am writing to urgently request your intervention on behalf of Marvin Mendez Ochoa (A-Number: 098-044-927), who was taken into ICE custody on March 12, 2026, during a routine USCIS appointment at the Holtsville Field Office.
+
+Marvin is:
+• A husband to a U.S. citizen
+• A father to three U.S. citizen children
+• A longstanding member of this community for over 20 years
+• Currently detained at Delaney Hall ICE Detention Facility in Newark, NJ
+
+His wife has an approved I-130 petition demonstrating his eligibility for legal status. He attended his appointment in good faith and was detained without warning, leaving his family without answers and without their primary provider.
+
+I respectfully urge you to:
+1. Inquire into the circumstances of his detention
+2. Advocate for his immediate release on humanitarian grounds
+3. Ensure his I-130 petition is processed expeditiously
+
+Marvin's family needs him home. This community needs him home. Please use your authority to help reunite this American family.
+
+Thank you for your time and consideration.
+
+Sincerely,
+[Your Name]
+[Your City, State]</textarea>
+        <button class="copy-btn" onclick="copyEmail()">Copy to Clipboard</button>
+      </div>
+    </div>
+
+    <!-- Card 3: Donate (Coming Soon) -->
+    <div class="help-card">
+      <div class="help-card-label">Support</div>
+      <div class="help-card-title">Support This Effort</div>
+      <div class="help-card-desc">Legal fees, family support, and advocacy costs. Every bit helps.</div>
+      <button class="help-btn coming-soon">Coming Soon</button>
+    </div>
+
+  </div>
+</section>
+
+<div class="foot">
+  projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends
+  <span class="foot-updated">Last updated: March 15, 2026</span>
+</div>
+
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
@@ -446,6 +690,30 @@
   }
   tick();
   setInterval(tick, 1000);
+
+  // EMAIL TEMPLATE
+  function toggleEmail() {
+    const template = document.getElementById('emailTemplate');
+    template.classList.toggle('active');
+  }
+
+  function copyEmail() {
+    const text = document.getElementById('emailText');
+    const btn = event.target;
+    
+    text.select();
+    text.setSelectionRange(0, 99999); // For mobile
+    
+    navigator.clipboard.writeText(text.value).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      
+      setTimeout(() => {
+        btn.textContent = 'Copy to Clipboard';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
 
   // MAP
   const map = L.map('map', {
