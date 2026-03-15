@@ -20,6 +20,16 @@
     --rule: #c8c0b0;
   }
 
+  /* Light theme variables */
+  body.light-theme {
+    --ink: #f8f6f1;
+    --paper: #1a1814;
+    --red: #d32f2f;
+    --mid: #8a7f70;
+    --light: #5a5248;
+    --rule: #d4cfc5;
+  }
+
   body {
     background: var(--ink);
     color: var(--paper);
@@ -43,6 +53,14 @@
       rgba(255,255,255,0.018) 39px, rgba(255,255,255,0.018) 40px
     );
     pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  body.light-theme::before {
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px,
+      rgba(0,0,0,0.015) 39px, rgba(0,0,0,0.015) 40px
+    );
   }
 
   .wrap {
@@ -523,9 +541,182 @@
     border-color: var(--red);
     color: var(--paper);
   }
+
+  /* Theme Toggle Button */
+  .theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(244,240,232,0.25);
+    background: rgba(244,240,232,0.03);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(8px);
+    padding: 0;
+  }
+
+  .theme-toggle:hover {
+    background: rgba(244,240,232,0.08);
+    border-color: rgba(244,240,232,0.4);
+  }
+
+  .theme-toggle .sun-icon { display: none; }
+  .theme-toggle .moon-icon { display: block; }
+
+  body.light-theme .theme-toggle {
+    border: 1px solid rgba(26,24,20,0.25);
+    background: rgba(26,24,20,0.03);
+    color: var(--paper);
+  }
+
+  body.light-theme .theme-toggle:hover {
+    background: rgba(26,24,20,0.08);
+    border-color: rgba(26,24,20,0.4);
+  }
+
+  body.light-theme .theme-toggle .sun-icon { display: block; }
+  body.light-theme .theme-toggle .moon-icon { display: none; }
+
+  /* Light theme color overrides */
+  body.light-theme {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  body.light-theme .clock-unit .num {
+    text-shadow: 0 0 80px rgba(211,47,47,0.3);
+  }
+
+  body.light-theme .sub {
+    color: rgba(26,24,20,0.65);
+  }
+
+  body.light-theme #map {
+    border: 1px solid rgba(26,24,20,0.15);
+  }
+
+  body.light-theme .leaflet-popup-content-wrapper {
+    background: #f8f6f1;
+    border: 1px solid rgba(26,24,20,0.2);
+  }
+
+  body.light-theme .leaflet-popup-tip {
+    background: #f8f6f1;
+  }
+
+  body.light-theme .popup-addr {
+    color: rgba(26,24,20,0.45);
+  }
+
+  body.light-theme .popup-current {
+    border: 1px solid rgba(26,24,20,0.3);
+  }
+
+  body.light-theme .timeline::before {
+    background: linear-gradient(to bottom, var(--red) 0%, rgba(211,47,47,0.15) 100%);
+  }
+
+  body.light-theme .tl-dot {
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 1.5px var(--red);
+  }
+
+  body.light-theme .tl-addr {
+    color: rgba(26,24,20,0.4);
+  }
+
+  body.light-theme .tl-note {
+    color: rgba(26,24,20,0.6);
+  }
+
+  body.light-theme .tl-badge {
+    border: 1px solid rgba(26,24,20,0.25);
+  }
+
+  body.light-theme .foot {
+    color: rgba(90,82,72,0.6);
+  }
+
+  body.light-theme .help-subtitle {
+    color: rgba(26,24,20,0.6);
+  }
+
+  body.light-theme .help-card {
+    background: rgba(26,24,20,0.02);
+    border: 1px solid rgba(26,24,20,0.12);
+  }
+
+  body.light-theme .help-card:hover {
+    background: rgba(26,24,20,0.04);
+    border-color: rgba(26,24,20,0.2);
+  }
+
+  body.light-theme .help-card-desc {
+    color: rgba(26,24,20,0.65);
+  }
+
+  body.light-theme .help-btn {
+    border: 1px solid rgba(26,24,20,0.3);
+  }
+
+  body.light-theme .help-btn:hover {
+    background: rgba(26,24,20,0.08);
+    border-color: rgba(26,24,20,0.5);
+  }
+
+  body.light-theme .email-template textarea {
+    background: rgba(248,246,241,0.6);
+    border: 1px solid rgba(26,24,20,0.15);
+  }
+
+  body.light-theme .email-template textarea:focus {
+    border-color: rgba(26,24,20,0.3);
+  }
+
+  body.light-theme .copy-btn {
+    border: 1px solid rgba(26,24,20,0.25);
+    background: rgba(26,24,20,0.05);
+  }
+
+  body.light-theme .copy-btn:hover {
+    background: rgba(26,24,20,0.1);
+    border-color: rgba(26,24,20,0.4);
+  }
+
+  @media (max-width: 640px) {
+    .theme-toggle {
+      top: 16px;
+      right: 16px;
+      width: 40px;
+      height: 40px;
+    }
+  }
 </style>
 </head>
 <body>
+
+<button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark theme">
+  <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+  <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </svg>
+</button>
 
 <div class="wrap">
   <div class="name">Free <span>Marvin</span> Mendez Ochoa</div>
@@ -577,7 +768,7 @@
       <div class="tl-time">March 12, 2026 &nbsp;·&nbsp; Afternoon</div>
       <div class="tl-place">Suffolk County Sheriff's Office</div>
       <div class="tl-addr">400 Carleton Ave, Central Islip, NY 11722</div>
-      <div class="tl-note">After being taken into ICE custody, Marvin was transported west to the Suffolk County Sheriff's Office for initial processing and holding.</div>
+      <div class="tl-note">After being taken into ICE custody, Marvin was transported west to the Suffolk County Sheriff's Office for initial processing and holding. <strong>His whereabouts during this time were difficult to verify — his family was unable to reach him or confirm his location.</strong></div>
     </div>
 
     <div class="tl-stop">
@@ -585,7 +776,7 @@
       <div class="tl-time">March 12, 2026 &nbsp;·&nbsp; 6:00 PM</div>
       <div class="tl-place">Nassau County Correctional Center</div>
       <div class="tl-addr">100 Carman Ave, East Meadow, NY 11554</div>
-      <div class="tl-note">Transferred again — further west, further from home. Within hours of his detention, Marvin had already been moved across two counties.</div>
+      <div class="tl-note">Transferred again — further west, further from home. Within hours of his detention, Marvin had already been moved across two counties. <strong>His family continued to be unable to reach him directly.</strong></div>
     </div>
 
     <div class="tl-stop">
@@ -636,7 +827,7 @@ Marvin is:
 • A longstanding member of this community for over 20 years
 • Currently detained at Delaney Hall ICE Detention Facility in Newark, NJ
 
-His wife has an approved I-130 petition demonstrating his eligibility for legal status. He attended his appointment in good faith and was detained without warning, leaving his family without answers and without their primary provider.
+His wife has an approved I-130 petition demonstrating his eligibility for legal status. He attended his appointment in good faith and was detained without warning, leaving his family without answers and without their co-provider.
 
 I respectfully urge you to:
 1. Inquire into the circumstances of his detention
@@ -723,8 +914,18 @@ Sincerely,
     scrollWheelZoom: false
   });
 
-  // CartoDB Dark Matter — free, no API key required
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+  // Check for saved theme preference, default to light
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  }
+
+  // Initial tile layer based on theme
+  const initialTileUrl = savedTheme === 'light'
+    ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+
+  let tileLayer = L.tileLayer(initialTileUrl, {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
     subdomains: 'abcd',
     maxZoom: 19
@@ -762,39 +963,88 @@ Sincerely,
   ];
 
   // Custom marker icons
-  function makeIcon(current) {
+  function makeIcon(current, theme) {
+    const isDark = theme !== 'light';
+    const markerBg = isDark ? '#c0392b' : '#d32f2f';
+    const markerBorder = isDark ? '#0e0e0e' : '#f8f6f1';
+    const currentBg = isDark ? '#f4f0e8' : '#1a1814';
+    const glowColor = isDark ? 'rgba(244,240,232,0.5)' : 'rgba(26,24,20,0.5)';
+    const glowColor2 = isDark ? 'rgba(244,240,232,0.4)' : 'rgba(26,24,20,0.4)';
+    const glowColor3 = isDark ? 'rgba(244,240,232,0.2)' : 'rgba(26,24,20,0.2)';
+    
     return L.divIcon({
       className: '',
       html: current
-        ? `<div style="width:16px;height:16px;border-radius:50%;background:#f4f0e8;border:2px solid #0e0e0e;box-shadow:0 0 0 2px #f4f0e8, 0 0 14px rgba(244,240,232,0.5);animation:mpulse 2s ease-in-out infinite;"></div>
-           <style>@keyframes mpulse{0%,100%{box-shadow:0 0 0 2px #f4f0e8,0 0 14px rgba(244,240,232,0.4)}50%{box-shadow:0 0 0 5px rgba(244,240,232,0.2),0 0 24px rgba(244,240,232,0.2)}}</style>`
-        : `<div style="width:12px;height:12px;border-radius:50%;background:#c0392b;border:2px solid #0e0e0e;box-shadow:0 0 0 1.5px #c0392b;"></div>`,
+        ? `<div style="width:16px;height:16px;border-radius:50%;background:${currentBg};border:2px solid ${markerBorder};box-shadow:0 0 0 2px ${currentBg}, 0 0 14px ${glowColor};animation:mpulse 2s ease-in-out infinite;"></div>
+           <style>@keyframes mpulse{0%,100%{box-shadow:0 0 0 2px ${currentBg},0 0 14px ${glowColor2}}50%{box-shadow:0 0 0 5px ${glowColor3},0 0 24px ${glowColor3}}}</style>`
+        : `<div style="width:12px;height:12px;border-radius:50%;background:${markerBg};border:2px solid ${markerBorder};box-shadow:0 0 0 1.5px ${markerBg};"></div>`,
       iconSize: current ? [16, 16] : [12, 12],
       iconAnchor: current ? [8, 8] : [6, 6],
       popupAnchor: [0, -12]
     });
   }
 
-  const latlngs = stops.map(s => s.latlng);
+  let routeLine;
+  let markers = [];
 
-  // Draw route line
-  L.polyline(latlngs, {
-    color: '#c0392b',
-    weight: 2,
-    opacity: 0.7,
-    dashArray: '8, 6'
-  }).addTo(map);
+  function drawMapElements(theme) {
+    const isDark = theme !== 'light';
+    const routeColor = isDark ? '#c0392b' : '#d32f2f';
+    const currentBg = isDark ? '#f4f0e8' : '#1a1814';
+    
+    // Clear existing elements
+    if (routeLine) map.removeLayer(routeLine);
+    markers.forEach(m => map.removeLayer(m));
+    markers = [];
+    
+    const latlngs = stops.map(s => s.latlng);
 
-  // Add numbered markers with popups
-  stops.forEach((stop, i) => {
-    const marker = L.marker(stop.latlng, { icon: makeIcon(stop.current) }).addTo(map);
-    const popupHtml = `
-      <div class="popup-time">${stop.time}</div>
-      <div class="popup-place">${stop.current ? `<span style="color:#f4f0e8">&#9679;</span> ` : ''}${stop.place}</div>
-      <div class="popup-addr">${stop.addr}</div>
-      ${stop.current ? '<div class="popup-current">Current Location</div>' : ''}
-    `;
-    marker.bindPopup(popupHtml, { maxWidth: 240, minWidth: 200 });
+    // Draw route line
+    routeLine = L.polyline(latlngs, {
+      color: routeColor,
+      weight: 2,
+      opacity: 0.7,
+      dashArray: '8, 6'
+    }).addTo(map);
+
+    // Add markers with popups
+    stops.forEach((stop) => {
+      const marker = L.marker(stop.latlng, { icon: makeIcon(stop.current, theme) }).addTo(map);
+      const popupHtml = `
+        <div class="popup-time">${stop.time}</div>
+        <div class="popup-place">${stop.current ? `<span style="color:${currentBg}">&#9679;</span> ` : ''}${stop.place}</div>
+        <div class="popup-addr">${stop.addr}</div>
+        ${stop.current ? '<div class="popup-current">Current Location</div>' : ''}
+      `;
+      marker.bindPopup(popupHtml, { maxWidth: 240, minWidth: 200 });
+      markers.push(marker);
+    });
+  }
+
+  // Initial draw
+  drawMapElements(savedTheme);
+
+  // Theme toggle functionality
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-theme');
+    const currentTheme = document.body.classList.contains('light-theme') ? 'light' : 'dark';
+    localStorage.setItem('theme', currentTheme);
+    
+    // Update map tiles
+    map.removeLayer(tileLayer);
+    const newTileUrl = currentTheme === 'light'
+      ? 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png'
+      : 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png';
+    
+    tileLayer = L.tileLayer(newTileUrl, {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+      subdomains: 'abcd',
+      maxZoom: 19
+    }).addTo(map);
+    
+    // Redraw markers and route
+    drawMapElements(currentTheme);
   });
 
   // Open last stop popup by default
