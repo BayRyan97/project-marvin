@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Marvin Mendez Ochoa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f4f0e8;
+    --red: #c0392b;
+    --mid: #5a5248;
+    --light: #9a9080;
+    --rule: #c8c0b0;
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px,
+      rgba(255,255,255,0.018) 39px, rgba(255,255,255,0.018) 40px
+    );
+    pointer-events: none;
+  }
+
+  .wrap {
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* NAME */
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .name span { color: var(--red); }
+
+  .a-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    color: var(--light);
+    text-transform: uppercase;
+    margin-bottom: 52px;
+  }
+
+  /* CLOCK */
+  .clock-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+
+  .clock {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 52px;
+  }
+
+  .clock-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clock-unit .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(3rem, 12vw, 7.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 80px rgba(192,57,43,0.4);
+    color: var(--paper);
+  }
+
+  .clock-unit .lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    color: var(--light);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .clock-sep {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(3rem, 12vw, 7.5rem);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--red);
+    animation: blink 1s step-end infinite;
+    padding: 0 4px;
+    align-self: flex-start;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.1; }
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--red);
+    margin: 0 auto 44px;
+    opacity: 0.6;
+  }
+
+  /* BLURB */
+  .blurb {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.75;
+    color: var(--paper);
+    margin-bottom: 20px;
+    letter-spacing: 0.01em;
+  }
+
+  .sub {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    font-weight: 400;
+    color: rgba(244,240,232,0.65);
+    line-height: 1.85;
+  }
+
+  /* FOOTER */
+  .foot {
+    margin-top: 56px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: rgba(154,144,128,0.5);
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="name">Free <span>Marvin</span> Mendez Ochoa</div>
+  <div class="a-number">A-Number: 098-044-927 &nbsp;·&nbsp; projectmarvin.io</div>
+
+  <div class="clock-label">Time separated from his family</div>
+  <div class="clock">
+    <div class="clock-unit"><span class="num" id="d">00</span><span class="lbl">Days</span></div>
+    <span class="clock-sep">:</span>
+    <div class="clock-unit"><span class="num" id="h">00</span><span class="lbl">Hours</span></div>
+    <span class="clock-sep">:</span>
+    <div class="clock-unit"><span class="num" id="m">00</span><span class="lbl">Minutes</span></div>
+    <span class="clock-sep">:</span>
+    <div class="clock-unit"><span class="num" id="s">00</span><span class="lbl">Seconds</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="blurb">
+    On March 12, 2026, Marvin Mendez Ochoa — a husband, a father of three, and a member of this community for over 20 years — was taken into federal custody without warning.
+  </p>
+  <p class="sub">
+    His wife is a U.S. citizen. His children were born here. They go to school here. This is the only country they know. Marvin built a life, a home, and a family in America — and he deserves to be in it.
+  </p>
+
+  <div class="foot">projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends</div>
+
+</div>
+
+<script>
+  const start = new Date('2026-03-12T13:00:00');
+  function tick() {
+    const diff = Math.max(0, Date.now() - start);
+    const total = Math.floor(diff / 1000);
+    const d = Math.floor(total / 86400);
+    const h = Math.floor((total % 86400) / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    document.getElementById('d').textContent = String(d).padStart(2,'0');
+    document.getElementById('h').textContent = String(h).padStart(2,'0');
+    document.getElementById('m').textContent = String(m).padStart(2,'0');
+    document.getElementById('s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+</body>
+</html>

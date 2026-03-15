@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Marvin Mendez Ochoa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --paper: #f4f0e8;
+    --red: #c0392b;
+    --mid: #5a5248;
+    --light: #9a9080;
+    --rule: #c8c0b0;
+  }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 24px 0;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 39px,
+      rgba(255,255,255,0.018) 39px, rgba(255,255,255,0.018) 40px
+    );
+    pointer-events: none;
+  }
+
+  .wrap {
+    max-width: 680px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .name span { color: var(--red); }
+
+  .a-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    color: var(--light);
+    text-transform: uppercase;
+    margin-bottom: 52px;
+  }
+
+  .clock-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+
+  .clock {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 52px;
+  }
+
+  .clock-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .clock-unit .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(3rem, 12vw, 7.5rem);
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-shadow: 0 0 80px rgba(192,57,43,0.4);
+    color: var(--paper);
+  }
+
+  .clock-unit .lbl {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+    color: var(--light);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .clock-sep {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(3rem, 12vw, 7.5rem);
+    font-weight: 500;
+    line-height: 1;
+    color: var(--red);
+    animation: blink 1s step-end infinite;
+    padding: 0 4px;
+    align-self: flex-start;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.1; }
+  }
+
+  .divider {
+    width: 40px;
+    height: 1px;
+    background: var(--red);
+    margin: 0 auto 44px;
+    opacity: 0.6;
+  }
+
+  .blurb {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: clamp(1rem, 2.2vw, 1.15rem);
+    font-weight: 500;
+    line-height: 1.75;
+    color: var(--paper);
+    margin-bottom: 20px;
+    letter-spacing: 0.01em;
+  }
+
+  .sub {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    font-weight: 400;
+    color: rgba(244,240,232,0.65);
+    line-height: 1.85;
+  }
+
+  /* MAP SECTION */
+  .map-section {
+    width: 100%;
+    max-width: 860px;
+    margin-top: 80px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .map-header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .map-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .map-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.2;
+  }
+
+  .map-subtitle {
+    margin-top: 8px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(244,240,232,0.4);
+  }
+
+  #map {
+    width: 100%;
+    height: 480px;
+    border: 1px solid rgba(200,192,176,0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Override leaflet popup to match site style */
+  .leaflet-popup-content-wrapper {
+    background: #1a1814;
+    color: var(--paper);
+    border: 1px solid rgba(200,192,176,0.2);
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .leaflet-popup-tip { background: #1a1814; }
+  .leaflet-popup-content {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin: 12px 16px;
+  }
+  .popup-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .popup-place {
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--paper);
+    margin-bottom: 2px;
+  }
+  .popup-addr {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(244,240,232,0.35);
+    letter-spacing: 0.04em;
+  }
+  .popup-current {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border: 1px solid rgba(244,240,232,0.3);
+    color: var(--paper);
+    margin-top: 6px;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    margin-top: 40px;
+    text-align: left;
+    position: relative;
+    padding-left: 36px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--red) 0%, rgba(192,57,43,0.15) 100%);
+  }
+
+  .tl-stop {
+    position: relative;
+    padding-bottom: 32px;
+  }
+  .tl-stop:last-child { padding-bottom: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: -30px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--red);
+    border: 2px solid var(--ink);
+    box-shadow: 0 0 0 1.5px var(--red);
+  }
+
+  .tl-dot.current {
+    background: var(--paper);
+    box-shadow: 0 0 0 1.5px var(--paper), 0 0 12px rgba(244,240,232,0.3);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 1.5px var(--paper), 0 0 12px rgba(244,240,232,0.3); }
+    50% { box-shadow: 0 0 0 3px rgba(244,240,232,0.2), 0 0 22px rgba(244,240,232,0.15); }
+  }
+
+  .tl-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.18em;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+
+  .tl-place {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--paper);
+    margin-bottom: 2px;
+  }
+
+  .tl-addr {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(244,240,232,0.3);
+    letter-spacing: 0.05em;
+    margin-bottom: 5px;
+  }
+
+  .tl-note {
+    font-size: 0.85rem;
+    color: rgba(244,240,232,0.5);
+    line-height: 1.65;
+  }
+
+  .tl-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.52rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border: 1px solid rgba(244,240,232,0.25);
+    color: var(--paper);
+    margin-bottom: 5px;
+  }
+
+  .foot {
+    margin: 64px 0 40px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.58rem;
+    letter-spacing: 0.15em;
+    color: rgba(154,144,128,0.5);
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="name">Free <span>Marvin</span> Mendez Ochoa</div>
+  <div class="a-number">A-Number: 098-044-927 &nbsp;·&nbsp; projectmarvin.io</div>
+
+  <div class="clock-label">Time separated from his family</div>
+  <div class="clock">
+    <div class="clock-unit"><span class="num" id="d">00</span><span class="lbl">Days</span></div>
+    <span class="clock-sep">:</span>
+    <div class="clock-unit"><span class="num" id="h">00</span><span class="lbl">Hours</span></div>
+    <span class="clock-sep">:</span>
+    <div class="clock-unit"><span class="num" id="m">00</span><span class="lbl">Minutes</span></div>
+    <span class="clock-sep">:</span>
+    <div class="clock-unit"><span class="num" id="s">00</span><span class="lbl">Seconds</span></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="blurb">
+    On March 12, 2026, Marvin Mendez Ochoa — a husband, a father of three, and a member of this community for over 20 years — was taken into federal custody without warning.
+  </p>
+  <p class="sub">
+    His wife is a U.S. citizen. His children were born here. They go to school here. This is the only country they know. Marvin built a life, a home, and a family in America — and he deserves to be in it.
+  </p>
+</div>
+
+<!-- MAP SECTION -->
+<section class="map-section">
+  <div class="map-header">
+    <div class="map-eyebrow">Detention Record</div>
+    <div class="map-title">Where They Took Him</div>
+    <div class="map-subtitle">From a routine meeting on Long Island to a federal facility in Newark — in under 30 hours</div>
+  </div>
+
+  <div id="map"></div>
+
+  <div class="timeline">
+
+    <div class="tl-stop">
+      <div class="tl-dot"></div>
+      <div class="tl-time">March 12, 2026 &nbsp;·&nbsp; ~1:00 PM</div>
+      <div class="tl-place">USCIS Holtsville Field Office</div>
+      <div class="tl-addr">30 Barretts Ave, Holtsville, NY 11742</div>
+      <div class="tl-note">Marvin attended a scheduled immigration meeting after receiving a formal I-797C notice regarding his I-130 petition. He walked in for a routine appointment. He did not walk out.</div>
+    </div>
+
+    <div class="tl-stop">
+      <div class="tl-dot"></div>
+      <div class="tl-time">March 12, 2026 &nbsp;·&nbsp; Afternoon</div>
+      <div class="tl-place">Suffolk County Sheriff's Office</div>
+      <div class="tl-addr">400 Carleton Ave, Central Islip, NY 11722</div>
+      <div class="tl-note">After being taken into ICE custody, Marvin was transported west to the Suffolk County Sheriff's Office for initial processing and holding.</div>
+    </div>
+
+    <div class="tl-stop">
+      <div class="tl-dot"></div>
+      <div class="tl-time">March 12, 2026 &nbsp;·&nbsp; 6:00 PM</div>
+      <div class="tl-place">Nassau County Correctional Center</div>
+      <div class="tl-addr">100 Carman Ave, East Meadow, NY 11554</div>
+      <div class="tl-note">Transferred again — further west, further from home. Within hours of his detention, Marvin had already been moved across two counties.</div>
+    </div>
+
+    <div class="tl-stop">
+      <div class="tl-dot current"></div>
+      <div class="tl-time">March 13, 2026 &nbsp;·&nbsp; 7:16 PM &nbsp;·&nbsp; Confirmed via ICE Locator</div>
+      <div class="tl-badge">Current Location</div>
+      <div class="tl-place">Delaney Hall ICE Detention Facility</div>
+      <div class="tl-addr">451 Doremus Ave, Newark, NJ 07105</div>
+      <div class="tl-note">Confirmed on the ICE detainee locator at 7:16 PM on March 13th. In under 30 hours, Marvin had been moved from a routine meeting on Long Island to a federal detention facility across state lines. He remains here as of March 15, 2026.</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="foot">projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+  // CLOCK
+  const start = new Date('2026-03-12T13:00:00');
+  function tick() {
+    const diff = Math.max(0, Date.now() - start);
+    const total = Math.floor(diff / 1000);
+    const d = Math.floor(total / 86400);
+    const h = Math.floor((total % 86400) / 3600);
+    const m = Math.floor((total % 3600) / 60);
+    const s = total % 60;
+    document.getElementById('d').textContent = String(d).padStart(2,'0');
+    document.getElementById('h').textContent = String(h).padStart(2,'0');
+    document.getElementById('m').textContent = String(m).padStart(2,'0');
+    document.getElementById('s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  // MAP
+  const map = L.map('map', {
+    center: [40.72, -73.55],
+    zoom: 9,
+    zoomControl: true,
+    scrollWheelZoom: false
+  });
+
+  // CartoDB Dark Matter — free, no API key required
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  const stops = [
+    {
+      latlng: [40.8069, -73.0404],
+      time: 'March 12, 2026 · ~1:00 PM',
+      place: 'USCIS Holtsville Field Office',
+      addr: '30 Barretts Ave, Holtsville, NY',
+      current: false
+    },
+    {
+      latlng: [40.7612, -73.1940],
+      time: 'March 12, 2026 · Afternoon',
+      place: 'Suffolk County Sheriff\'s Office',
+      addr: '400 Carleton Ave, Central Islip, NY',
+      current: false
+    },
+    {
+      latlng: [40.7350, -73.5527],
+      time: 'March 12, 2026 · 6:00 PM',
+      place: 'Nassau County Correctional Center',
+      addr: '100 Carman Ave, East Meadow, NY',
+      current: false
+    },
+    {
+      latlng: [40.7181, -74.1285],
+      time: 'March 13, 2026 · 7:16 PM',
+      place: 'Delaney Hall ICE Detention Facility',
+      addr: '451 Doremus Ave, Newark, NJ',
+      current: true
+    }
+  ];
+
+  // Custom marker icons
+  function makeIcon(current) {
+    return L.divIcon({
+      className: '',
+      html: current
+        ? `<div style="width:16px;height:16px;border-radius:50%;background:#f4f0e8;border:2px solid #0e0e0e;box-shadow:0 0 0 2px #f4f0e8, 0 0 14px rgba(244,240,232,0.5);animation:mpulse 2s ease-in-out infinite;"></div>
+           <style>@keyframes mpulse{0%,100%{box-shadow:0 0 0 2px #f4f0e8,0 0 14px rgba(244,240,232,0.4)}50%{box-shadow:0 0 0 5px rgba(244,240,232,0.2),0 0 24px rgba(244,240,232,0.2)}}</style>`
+        : `<div style="width:12px;height:12px;border-radius:50%;background:#c0392b;border:2px solid #0e0e0e;box-shadow:0 0 0 1.5px #c0392b;"></div>`,
+      iconSize: current ? [16, 16] : [12, 12],
+      iconAnchor: current ? [8, 8] : [6, 6],
+      popupAnchor: [0, -12]
+    });
+  }
+
+  const latlngs = stops.map(s => s.latlng);
+
+  // Draw route line
+  L.polyline(latlngs, {
+    color: '#c0392b',
+    weight: 2,
+    opacity: 0.7,
+    dashArray: '8, 6'
+  }).addTo(map);
+
+  // Add numbered markers with popups
+  stops.forEach((stop, i) => {
+    const marker = L.marker(stop.latlng, { icon: makeIcon(stop.current) }).addTo(map);
+    const popupHtml = `
+      <div class="popup-time">${stop.time}</div>
+      <div class="popup-place">${stop.current ? `<span style="color:#f4f0e8">&#9679;</span> ` : ''}${stop.place}</div>
+      <div class="popup-addr">${stop.addr}</div>
+      ${stop.current ? '<div class="popup-current">Current Location</div>' : ''}
+    `;
+    marker.bindPopup(popupHtml, { maxWidth: 240, minWidth: 200 });
+  });
+
+  // Open last stop popup by default
+  setTimeout(() => {
+    map.eachLayer(layer => {
+      if (layer instanceof L.Marker) {
+        const ll = layer.getLatLng();
+        if (Math.abs(ll.lat - 40.7181) < 0.001) layer.openPopup();
+      }
+    });
+  }, 600);
+</script>
+</body>
+</html>
