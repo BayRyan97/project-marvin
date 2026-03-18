@@ -2147,9 +2147,11 @@ Atentamente,
   let currentPhotos = [];
   const photoItems = document.querySelectorAll('.photo-item img');
   
-  // Initialize with the first 6 photos
+  // Initialize with 6 unique random photos from allPhotos
+  const initialPhotos = shuffleArray([...allPhotos]).slice(0, 6);
   photoItems.forEach((img, index) => {
-    currentPhotos.push(img.src.split('/').pop());
+    img.src = initialPhotos[index];
+    currentPhotos.push(initialPhotos[index].split('/').pop());
   });
 
   // Alternating pattern: DBF (positions 3,1,5), then AEC (positions 0,4,2)
