@@ -855,10 +855,25 @@
 
   @media (max-width: 640px) {
     .theme-toggle {
-      top: 16px;
-      right: 16px;
-      width: 40px;
-      height: 40px;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+    }
+
+    .lang-toggle {
+      top: 12px;
+      right: 56px;
+      height: 36px;
+      font-size: 0.58rem;
+    }
+
+    .lang-option {
+      padding: 0 8px;
+    }
+
+    .lang-separator {
+      height: 16px;
     }
   }
 
@@ -1298,33 +1313,7 @@
       <button class="help-btn" onclick="toggleEmail()" data-en="View Template" data-es="Ver Plantilla">View Template</button>
       
       <div class="email-template" id="emailTemplate">
-        <textarea id="emailText" readonly>Subject: Urgent Request for Release — Marvin Mendez Ochoa (A# 098-044-927)
-
-Dear [Representative/Official Name],
-
-I am writing to urgently request your intervention on behalf of Marvin Mendez Ochoa (A-Number: 098-044-927), who was taken into ICE custody on March 12, 2026, during a routine USCIS appointment at the Holtsville Field Office.
-
-Marvin is:
-• A husband to a U.S. citizen
-• A father to three U.S. citizen children
-• A longstanding member of this community for over 20 years
-• A resident of Holtsville, New York
-• Currently detained at Delaney Hall ICE Detention Facility in Newark, NJ
-
-His wife has an approved I-130 petition demonstrating his eligibility for legal status. He attended his appointment in good faith and was detained without warning, leaving his family without answers and without their co-provider.
-
-I respectfully urge you to:
-1. Inquire into the circumstances of his detention
-2. Advocate for his immediate release on humanitarian grounds
-3. Ensure his right to a fair trial
-
-Marvin's family needs him home. This community needs him home. Please use your authority to help reunite this American family.
-
-Thank you for your time and consideration.
-
-Sincerely,
-[Your Name]
-[Your City, State]</textarea>
+        <textarea id="emailText" readonly></textarea>
         <button class="copy-btn" onclick="copyEmail()" data-en="Copy to Clipboard" data-es="Copiar al Portapapeles">Copy to Clipboard</button>
       </div>
     </div>
@@ -1385,6 +1374,64 @@ Sincerely,
   const savedLang = localStorage.getItem('language') || 'en';
   let currentLang = savedLang;
 
+  // Email templates in both languages
+  const emailTemplates = {
+    en: `Subject: Urgent Request for Release — Marvin Mendez Ochoa (A# 098-044-927)
+
+Dear [Representative/Official Name],
+
+I am writing to urgently request your intervention on behalf of Marvin Mendez Ochoa (A-Number: 098-044-927), who was taken into ICE custody on March 12, 2026, during a routine USCIS appointment at the Holtsville Field Office.
+
+Marvin is:
+• A husband to a U.S. citizen
+• A father to three U.S. citizen children
+• A longstanding member of this community for over 20 years
+• A resident of Holtsville, New York
+• Currently detained at Delaney Hall ICE Detention Facility in Newark, NJ
+
+His wife has an approved I-130 petition demonstrating his eligibility for legal status. He attended his appointment in good faith and was detained without warning, leaving his family without answers and without their co-provider.
+
+I respectfully urge you to:
+1. Inquire into the circumstances of his detention
+2. Advocate for his immediate release on humanitarian grounds
+3. Ensure his right to a fair trial
+
+Marvin's family needs him home. This community needs him home. Please use your authority to help reunite this American family.
+
+Thank you for your time and consideration.
+
+Sincerely,
+[Your Name]
+[Your City, State]`,
+    es: `Asunto: Solicitud Urgente de Liberación — Marvin Mendez Ochoa (A# 098-044-927)
+
+Estimado/a [Nombre del Representante/Oficial],
+
+Le escribo para solicitar urgentemente su intervención en nombre de Marvin Mendez Ochoa (Número-A: 098-044-927), quien fue detenido por ICE el 12 de marzo de 2026, durante una cita de rutina de USCIS en la oficina de Holtsville.
+
+Marvin es:
+• Esposo de una ciudadana estadounidense
+• Padre de tres hijos ciudadanos estadounidenses
+• Un miembro de larga data de esta comunidad por más de 20 años
+• Residente de Holtsville, Nueva York
+• Actualmente detenido en el Centro de Detención de ICE Delaney Hall en Newark, NJ
+
+Su esposa tiene una petición I-130 aprobada que demuestra su elegibilidad para obtener estatus legal. Asistió a su cita de buena fe y fue detenido sin previo aviso, dejando a su familia sin respuestas y sin su co-proveedor.
+
+Respetuosamente le insto a:
+1. Investigar las circunstancias de su detención
+2. Abogar por su liberación inmediata por razones humanitarias
+3. Asegurar su derecho a un juicio justo
+
+La familia de Marvin lo necesita en casa. Esta comunidad lo necesita en casa. Por favor use su autoridad para ayudar a reunir a esta familia estadounidense.
+
+Gracias por su tiempo y consideración.
+
+Atentamente,
+[Su Nombre]
+[Su Ciudad, Estado]`
+  };
+
   function setLanguage(lang) {
     currentLang = lang;
     localStorage.setItem('language', lang);
@@ -1410,6 +1457,12 @@ Sincerely,
         }
       }
     });
+    
+    // Update email template
+    const emailTextarea = document.getElementById('emailText');
+    if (emailTextarea) {
+      emailTextarea.value = emailTemplates[lang];
+    }
     
     // Update language button active state
     document.querySelectorAll('.lang-option').forEach(opt => {
@@ -1438,16 +1491,17 @@ Sincerely,
   function copyEmail() {
     const text = document.getElementById('emailText');
     const btn = event.target;
+    const originalText = btn.textContent;
     
     text.select();
     text.setSelectionRange(0, 99999); // For mobile
     
     navigator.clipboard.writeText(text.value).then(() => {
-      btn.textContent = 'Copied!';
+      btn.textContent = currentLang === 'en' ? 'Copied!' : '¡Copiado!';
       btn.classList.add('copied');
       
       setTimeout(() => {
-        btn.textContent = 'Copy to Clipboard';
+        btn.textContent = originalText;
         btn.classList.remove('copied');
       }, 2000);
     });
