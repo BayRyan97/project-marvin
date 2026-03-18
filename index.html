@@ -1707,9 +1707,6 @@ Atentamente,
     });
   }
 
-  // Initialize language on load
-  setLanguage(currentLang);
-
   // Language toggle button - click on individual options
   document.querySelectorAll('.lang-option').forEach(opt => {
     opt.addEventListener('click', (e) => {
@@ -1893,8 +1890,8 @@ Atentamente,
   // Initialize testimonials
   buildTestimonials(currentLang);
 
-  // Auto-advance every 9.6 seconds
-  setInterval(nextTestimonial, 9600);
+  // Auto-advance every 14 seconds
+  setInterval(nextTestimonial, 14000);
 
   // Keyboard navigation for testimonials
   document.addEventListener('keydown', (e) => {
@@ -2207,6 +2204,9 @@ Atentamente,
 
   // Start photo rotation every 5 seconds
   setInterval(rotatePhotos, 5000);
+
+  // Initialize language on load (must be after all function definitions)
+  setLanguage(currentLang);
 </script>
 </body>
 </html>
