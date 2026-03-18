@@ -95,3 +95,6 @@
 
 **A Licensed Electrician & 12-Year Acquaintance**
 > "On job sites, you quickly learn who you can rely on — and Marvin has always been one of those people. He treats others with respect, takes initiative without being asked, and carries himself in a way that reflects strong character."
+
+**Someone Who Grew Up Alongside Him**
+> "I have known Marvin since I was eleven years old, working alongside him on job sites. His smile lit up every room, his patience made any task feel achievable, and he made sure everyone around him felt heard — all while keeping everyone laughing. Marvin is not an abstraction in an immigration debate. He is the American Dream, lived out in practice, every single day."

@@ -358,6 +358,39 @@
     margin-bottom: 5px;
   }
 
+  .closing-quote {
+    margin: 80px auto 48px;
+    max-width: 640px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .closing-quote-text {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 400;
+    color: rgba(244,240,232,0.85);
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .closing-quote-author {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: rgba(154,144,128,0.6);
+    text-transform: uppercase;
+  }
+
+  body.light-theme .closing-quote-text {
+    color: rgba(26,24,20,0.75);
+  }
+
+  body.light-theme .closing-quote-author {
+    color: rgba(26,24,20,0.4);
+  }
+
   .foot {
     margin: 64px 0 40px;
     font-family: 'IBM Plex Mono', monospace;
@@ -1552,6 +1585,11 @@
 
   </div>
 </section>
+
+<div class="closing-quote">
+  <div class="closing-quote-text" data-en='"Do not go gentle into that good night."' data-es='"No entres dócilmente en esa buena noche."'>"Do not go gentle into that good night."</div>
+  <div class="closing-quote-author">— Dylan Thomas</div>
+</div>
 
 <div class="foot">
   <span data-en="projectmarvin.io · maintained by his family & friends" data-es="projectmarvin.io · mantenido por su familia y amigos">projectmarvin.io &nbsp;·&nbsp; maintained by his family &amp; friends</span>
