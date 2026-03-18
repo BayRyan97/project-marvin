@@ -1017,6 +1017,81 @@
     border-color: rgba(192,57,43,0.3);
     background: rgba(192,57,43,0.05);
   }
+
+  /* Photo Gallery Section */
+  .photo-section {
+    width: 100%;
+    max-width: 860px;
+    margin-top: 80px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .photo-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .photo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.2;
+    margin-bottom: 40px;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .photo-item {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(244,240,232,0.12);
+    transition: all 0.3s ease;
+    aspect-ratio: 1;
+  }
+
+  .photo-item.fade-out {
+    opacity: 0;
+  }
+
+  .photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.6s ease;
+  }
+
+  .photo-item:hover {
+    border-color: rgba(244,240,232,0.3);
+    transform: translateY(-2px);
+  }
+
+  body.light-theme .photo-item {
+    border: 1px solid rgba(26,24,20,0.12);
+  }
+
+  body.light-theme .photo-item:hover {
+    border-color: rgba(26,24,20,0.3);
+  }
+
+  @media (max-width: 640px) {
+    .photo-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1082,6 +1157,33 @@
     His wife is a U.S. citizen. His children were born here. They go to school here. This is the only country they know. Marvin built a life, a home, and a family in America — and he deserves to be in it.
   </p>
 </div>
+
+<!-- PHOTO GALLERY SECTION -->
+<section class="photo-section">
+  <div class="photo-eyebrow" data-en="Family & Community" data-es="Familia y Comunidad">Family & Community</div>
+  <div class="photo-title" data-en="This is Marvin" data-es="Este es Marvin">This is Marvin</div>
+  
+  <div class="photo-grid">
+    <div class="photo-item">
+      <img src="images/photo1.jpg" alt="Marvin with his family">
+    </div>
+    <div class="photo-item">
+      <img src="images/photo2.jpg" alt="Marvin in the community">
+    </div>
+    <div class="photo-item">
+      <img src="images/photo3.jpg" alt="Marvin's daily life">
+    </div>
+    <div class="photo-item">
+      <img src="images/photo4.jpg" alt="Marvin with loved ones">
+    </div>
+    <div class="photo-item">
+      <img src="images/photo5.jpg" alt="Marvin at home">
+    </div>
+    <div class="photo-item">
+      <img src="images/photo6.jpg" alt="Marvin and his family">
+    </div>
+  </div>
+</section>
 
 <!-- MAP SECTION -->
 <section class="map-section">
@@ -1540,6 +1642,103 @@ Sincerely,
       }
     });
   }, 600);
+
+  // Photo Gallery Rotation
+  const allPhotos = [
+    'images/Copy of 3cfd0c47-d491-4263-a984-5176f6c31f7c.jpeg',
+    'images/Copy of IMG_0435.JPG',
+    'images/Copy of IMG_0860.jpeg',
+    'images/Copy of IMG_1143.JPG',
+    'images/Copy of IMG_2099.JPEG',
+    'images/Copy of IMG_2243.JPG',
+    'images/Copy of IMG_3683.jpeg',
+    'images/Copy of IMG_3766.jpeg',
+    'images/Copy of IMG_4027.jpeg',
+    'images/Copy of IMG_4109.jpeg',
+    'images/Copy of IMG_4290.jpeg',
+    'images/Copy of IMG_4468.jpeg',
+    'images/Copy of IMG_4638.jpeg',
+    'images/Copy of IMG_5029.jpeg',
+    'images/Copy of IMG_5214.jpeg',
+    'images/Copy of IMG_5870.jpeg',
+    'images/Copy of IMG_5904.jpeg',
+    'images/Copy of IMG_5935.jpeg',
+    'images/Copy of IMG_6678.jpeg',
+    'images/Copy of IMG_7990.jpeg',
+    'images/Copy of IMG_8775.jpeg',
+    'images/Copy of IMG_9266.jpeg'
+  ];
+
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  // Track currently displayed photos
+  let currentPhotos = [];
+  const photoItems = document.querySelectorAll('.photo-item img');
+  
+  // Initialize with the first 6 photos
+  photoItems.forEach((img, index) => {
+    currentPhotos.push(img.src.split('/').pop());
+  });
+
+  // Alternating pattern: DBF (positions 3,1,5), then AEC (positions 0,4,2)
+  const rotationPatterns = [
+    [3, 1, 5], // D, B, F
+    [0, 4, 2]  // A, E, C
+  ];
+  let currentPatternIndex = 0;
+
+  function rotatePhotos() {
+    // Get available photos (exclude currently displayed ones)
+    const availablePhotos = allPhotos.filter(photo => {
+      const filename = photo.split('/').pop();
+      return !currentPhotos.includes(filename);
+    });
+    
+    // Get the current rotation pattern
+    const positions = rotationPatterns[currentPatternIndex];
+    currentPatternIndex = (currentPatternIndex + 1) % rotationPatterns.length;
+    
+    // Get 3 unique random new photos
+    const newPhotos = shuffleArray(availablePhotos).slice(0, 3);
+    
+    // Validate no duplicates will exist in the grid after update
+    const futurePhotos = [...currentPhotos];
+    positions.forEach((position, i) => {
+      futurePhotos[position] = newPhotos[i].split('/').pop();
+    });
+    
+    // Check for duplicates
+    const uniquePhotos = new Set(futurePhotos);
+    if (uniquePhotos.size !== futurePhotos.length) {
+      // If duplicates would occur, skip this rotation
+      console.warn('Duplicate detected, skipping rotation');
+      return;
+    }
+    
+    // Update only the selected positions
+    positions.forEach((position, i) => {
+      const img = photoItems[position];
+      const newPhoto = newPhotos[i];
+      
+      img.style.opacity = '0';
+      setTimeout(() => {
+        img.src = newPhoto;
+        // Update tracking array
+        currentPhotos[position] = newPhoto.split('/').pop();
+        img.style.opacity = '1';
+      }, 300);
+    });
+  }
+
+  // Start photo rotation every 5 seconds
+  setInterval(rotatePhotos, 5000);
 </script>
 </body>
 </html>
