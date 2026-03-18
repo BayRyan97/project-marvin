@@ -1107,6 +1107,218 @@
       gap: 12px;
     }
   }
+
+  /* Testimonials Section */
+  .testimonials-section {
+    width: 100%;
+    max-width: 860px;
+    margin-top: 80px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonials-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+
+  .testimonials-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 3vw, 1.9rem);
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .testimonials-subtitle {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 0.85rem;
+    color: rgba(244,240,232,0.5);
+    margin-bottom: 48px;
+    line-height: 1.6;
+  }
+
+  body.light-theme .testimonials-subtitle {
+    color: rgba(26,24,20,0.6);
+  }
+
+  .testimonial-carousel {
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .testimonial-track {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+  }
+
+  .testimonial-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 32px;
+    background: rgba(244,240,232,0.02);
+    border: 1px solid rgba(244,240,232,0.12);
+    text-align: left;
+    box-sizing: border-box;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+
+  .testimonial-card.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .testimonial-quote {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--paper);
+    margin-bottom: 24px;
+    font-style: italic;
+    position: relative;
+    padding-left: 12px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .testimonial-quote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    position: absolute;
+    top: -12px;
+    left: -8px;
+    color: var(--red);
+    opacity: 0.3;
+    line-height: 1;
+  }
+
+  .testimonial-author {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--light);
+    text-transform: uppercase;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  body.light-theme .testimonial-card {
+    background: rgba(26,24,20,0.02);
+    border: 1px solid rgba(26,24,20,0.12);
+  }
+
+  .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(244,240,232,0.25);
+    background: rgba(244,240,232,0.03);
+    color: var(--paper);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    z-index: 10;
+  }
+
+  .carousel-nav:hover {
+    background: rgba(244,240,232,0.08);
+    border-color: rgba(244,240,232,0.4);
+  }
+
+  .carousel-nav.prev {
+    left: -50px;
+  }
+
+  .carousel-nav.next {
+    right: -50px;
+  }
+
+  body.light-theme .carousel-nav {
+    border: 1px solid rgba(26,24,20,0.25);
+    background: rgba(26,24,20,0.03);
+  }
+
+  body.light-theme .carousel-nav:hover {
+    background: rgba(26,24,20,0.08);
+    border-color: rgba(26,24,20,0.4);
+  }
+
+  .carousel-indicators {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 24px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(244,240,232,0.2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .carousel-dot.active {
+    background: var(--red);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  body.light-theme .carousel-dot {
+    background: rgba(26,24,20,0.2);
+  }
+
+  @media (max-width: 640px) {
+    .testimonial-card {
+      padding: 32px 24px;
+    }
+
+    .testimonial-quote {
+      font-size: 0.92rem;
+      padding-left: 8px;
+    }
+
+    .carousel-nav {
+      width: 36px;
+      height: 36px;
+      font-size: 1rem;
+    }
+
+    .carousel-nav.prev {
+      left: -40px;
+    }
+
+    .carousel-nav.next {
+      right: -40px;
+    }
+  }
 </style>
 </head>
 <body>
@@ -1197,6 +1409,26 @@
     <div class="photo-item">
       <img src="images/photo6.jpg" alt="Marvin and his family">
     </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section">
+  <div class="testimonials-eyebrow" data-en="19 Letters of Support" data-es="19 Cartas de Apoyo">19 Letters of Support</div>
+  <div class="testimonials-title" data-en="What His Community Says" data-es="Lo Que Dice Su Comunidad">What His Community Says</div>
+  <div class="testimonials-subtitle" data-en="From neighbors, colleagues, and friends who know Marvin best" data-es="De vecinos, colegas y amigos que mejor conocen a Marvin">From neighbors, colleagues, and friends who know Marvin best</div>
+
+  <div class="testimonial-carousel">
+    <button class="carousel-nav prev" onclick="prevTestimonial()" aria-label="Previous testimonial">‹</button>
+    <button class="carousel-nav next" onclick="nextTestimonial()" aria-label="Next testimonial">›</button>
+    
+    <div class="testimonial-track" id="testimonialTrack">
+      <!-- Testimonials will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <div class="carousel-indicators" id="carouselIndicators">
+    <!-- Dots will be dynamically inserted here -->
   </div>
 </section>
 
@@ -1480,6 +1712,166 @@ Atentamente,
       const lang = opt.getAttribute('data-lang');
       setLanguage(lang);
     });
+  });
+
+  // TESTIMONIALS CAROUSEL
+  const testimonials = [
+    {
+      quote: "Marvin represents all of the fine qualities that all citizens should possess. He is one of the hardest working and most responsible and dependable individuals I know. He has always been available to lend a helping hand to me and my family whenever we have needed assistance.",
+      author: "A Licensed Attorney & Retired NY State Court Employee"
+    },
+    {
+      quote: "Marvin Mendez Ochoa has taken the time to learn the language, educate himself, raise a family and cause no harm or foul to anyone while here. He has enhanced many people's lives with his skill and dedication to his carpentry craft.",
+      author: "A Conservative US Citizen, Wife & Mother of Three"
+    },
+    {
+      quote: "He is an asset to our community, who goes above and beyond to help others in need. He is honest and trustworthy — a loving husband and father as well as an incredibly hardworking man.",
+      author: "A Long Island Business Owner & Community Member"
+    },
+    {
+      quote: "Marvin has an infectious personality and brings positivity to those around him. I have seen Marvin raise his children and support his wife with dedication and integrity. He is always willing to lend a helping hand and be there for others in his community.",
+      author: "A Licensed Plumbing Contractor, Oyster Bay NY"
+    },
+    {
+      quote: "Beyond his personal integrity, Marvin is a devoted father, a supportive husband, and loyal to all his friends and coworkers. His commitment to his community is always on display — he is always willing to lend his craft to anyone in need.",
+      author: "A Partner at a Family-Owned GM Dealership, 32 Years in Business"
+    },
+    {
+      quote: "Marvin is deeply devoted to his wife and children. He takes his responsibilities as a husband and father very seriously and works tirelessly to provide a stable, safe, and loving life for his family. This country needs people like Mr. Ochoa.",
+      author: "A Naturalized US Citizen & Homeowner"
+    },
+    {
+      quote: "I have known Marvin for close to twenty years. He is reliable, dedicated, and meticulous. I have been to his house and met his family and he is nothing less than a wonderful husband and father. I can honestly say that our community is a better place because of him.",
+      author: "Owner & Operator of an A/C & Heating Corp., 20-Year Acquaintance"
+    },
+    {
+      quote: "Over the past 10 years, Marvin has never gotten into any arguments or trouble. He consistently demonstrated his ability to be a team player — with experience, leadership, creativity, and resilience. Beyond his impressive skills, he is a person of excellent character.",
+      author: "President of a Long Island Soccer League"
+    },
+    {
+      quote: "Over the years Marvin and I became very good friends. I can tell you — as good a person he is at work, he is 100x better at home as a family man and friend. I have never once seen Marvin do anything offensive, illegal, or inhumane.",
+      author: "An Electrical Contractor, Business Owner Since 2003"
+    },
+    {
+      quote: "During my time interacting with Marvin, he consistently showed his dedication to providing excellent customer service. He was hardworking, consistently gave his highest effort, and produced high quality work.",
+      author: "A Carpentry Customer"
+    },
+    {
+      quote: "What stands out most is how consistently Marvin shows up for the people in his life. He is reliable, caring, empathetic, and takes his responsibilities seriously — qualities he demonstrates through his actions every day.",
+      author: "A Licensed Clinical Social Worker & Therapist"
+    },
+    {
+      quote: "Marvin is a man of strong moral character, integrity, and deep commitment to his family, work, and community. As a father, he is attentive, loving, and deeply involved in his children's lives. As a husband, he is supportive, respectful, and devoted.",
+      author: "Owner of a Kitchen & Bath Design Company, 12-Year Acquaintance"
+    },
+    {
+      quote: "Marvin is an exemplary member of our community who consistently demonstrates integrity, kindness, and a strong sense of responsibility. He is a respectful and devoted husband and a caring father who prioritizes the well-being of his family.",
+      author: "A Retired 37-Year MTA Employee & Homeowner"
+    },
+    {
+      quote: "The embodiment of values has always been something that draws me towards or away from people. In Marvin's case, it has drawn me closer to him and fostered a deep admiration for the many strong values he exhibits — sincerity, resilience, generosity, helpfulness, and diligence.",
+      author: "Marvin's Sister-In-Law, Known for 19 Years"
+    },
+    {
+      quote: "Marvin took time away from his weekend and his family to help construct my home — just to help me out during a rough time when my father was dying. He is an incredibly compassionate human who gave of himself to help a friend.",
+      author: "A Senior Production Manager, Neighbor & Friend"
+    },
+    {
+      quote: "Of all the men I have worked with, Marvin stands out as one of the best. He is one of the hardest, most honest, and dedicated men to work with. He may not have been born in the USA, but with all his love and contribution to his family and society, I cannot think of anyone more deserving to become a citizen.",
+      author: "A Long-Time Colleague & Co-Worker"
+    },
+    {
+      quote: "Marvin works hard to provide for his family and serves as a steady, reliable presence in their lives. He is a loyal friend — someone who can be counted on in times of need — and a respectful, contributing member of the community.",
+      author: "A New York Resident & Community Member"
+    },
+    {
+      quote: "I had the opportunity to get to know Marvin professionally and he was incredibly hardworking, respectful, and diligent in his work. He was always on time, communicative, reliable, and efficient.",
+      author: "A Carpentry Customer"
+    },
+    {
+      quote: "On job sites, you quickly learn who you can rely on — and Marvin has always been one of those people. He treats others with respect, takes initiative without being asked, and carries himself in a way that reflects strong character.",
+      author: "A Licensed Electrician & 12-Year Acquaintance"
+    }
+  ];
+
+  let currentTestimonialIndex = 0;
+  let shuffledTestimonials = [];
+
+  function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  }
+
+  function buildTestimonials() {
+    const track = document.getElementById('testimonialTrack');
+    const indicators = document.getElementById('carouselIndicators');
+    
+    // Shuffle testimonials
+    shuffledTestimonials = shuffleArray(testimonials);
+    
+    // Build testimonial cards
+    shuffledTestimonials.forEach((testimonial, index) => {
+      const card = document.createElement('div');
+      card.className = 'testimonial-card' + (index === 0 ? ' active' : '');
+      card.innerHTML = `
+        <div class="testimonial-quote">${testimonial.quote}</div>
+        <div class="testimonial-author">${testimonial.author}</div>
+      `;
+      track.appendChild(card);
+      
+      // Build indicator dots
+      const dot = document.createElement('div');
+      dot.className = 'carousel-dot' + (index === 0 ? ' active' : '');
+      dot.onclick = () => goToTestimonial(index);
+      indicators.appendChild(dot);
+    });
+  }
+
+  function updateCarousel() {
+    const cards = document.querySelectorAll('.testimonial-card');
+    const dots = document.querySelectorAll('.carousel-dot');
+    
+    cards.forEach((card, index) => {
+      card.classList.toggle('active', index === currentTestimonialIndex);
+    });
+    
+    dots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentTestimonialIndex);
+    });
+  }
+
+  function nextTestimonial() {
+    currentTestimonialIndex = (currentTestimonialIndex + 1) % shuffledTestimonials.length;
+    updateCarousel();
+  }
+
+  function prevTestimonial() {
+    currentTestimonialIndex = (currentTestimonialIndex - 1 + shuffledTestimonials.length) % shuffledTestimonials.length;
+    updateCarousel();
+  }
+
+  function goToTestimonial(index) {
+    currentTestimonialIndex = index;
+    updateCarousel();
+  }
+
+  // Initialize testimonials
+  buildTestimonials();
+
+  // Auto-advance every 9.6 seconds
+  setInterval(nextTestimonial, 9600);
+
+  // Keyboard navigation for testimonials
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      prevTestimonial();
+    } else if (e.key === 'ArrowRight') {
+      nextTestimonial();
+    }
   });
 
   // EMAIL TEMPLATE
