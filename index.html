@@ -1696,6 +1696,11 @@ Atentamente,
       emailTextarea.value = emailTemplates[lang];
     }
     
+    // Update testimonials
+    if (document.getElementById('testimonialTrack')) {
+      buildTestimonials(lang);
+    }
+    
     // Update language button active state
     document.querySelectorAll('.lang-option').forEach(opt => {
       opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
@@ -1717,79 +1722,98 @@ Atentamente,
   // TESTIMONIALS CAROUSEL
   const testimonials = [
     {
-      quote: "Marvin represents all of the fine qualities that all citizens should possess. He is one of the hardest working and most responsible and dependable individuals I know. He has always been available to lend a helping hand to me and my family whenever we have needed assistance.",
+      en: "Marvin represents all of the fine qualities that all citizens should possess. He is one of the hardest working and most responsible and dependable individuals I know. He has always been available to lend a helping hand to me and my family whenever we have needed assistance.",
+      es: "Marvin representa todas las buenas cualidades que todo ciudadano debería poseer. Es una de las personas más trabajadoras, responsables y confiables que conozco. Siempre ha estado disponible para echar una mano a mí y a mi familia cuando hemos necesitado ayuda.",
       author: "A Licensed Attorney & Retired NY State Court Employee"
     },
     {
-      quote: "Marvin Mendez Ochoa has taken the time to learn the language, educate himself, raise a family and cause no harm or foul to anyone while here. He has enhanced many people's lives with his skill and dedication to his carpentry craft.",
+      en: "Marvin Mendez Ochoa has taken the time to learn the language, educate himself, raise a family and cause no harm or foul to anyone while here. He has enhanced many people's lives with his skill and dedication to his carpentry craft.",
+      es: "Marvin Mendez Ochoa se ha tomado el tiempo para aprender el idioma, educarse, formar una familia y no causar daño ni falta a nadie mientras está aquí. Ha mejorado la vida de muchas personas con su habilidad y dedicación a su oficio de carpintería.",
       author: "A Conservative US Citizen, Wife & Mother of Three"
     },
     {
-      quote: "He is an asset to our community, who goes above and beyond to help others in need. He is honest and trustworthy — a loving husband and father as well as an incredibly hardworking man.",
+      en: "He is an asset to our community, who goes above and beyond to help others in need. He is honest and trustworthy — a loving husband and father as well as an incredibly hardworking man.",
+      es: "Es un activo para nuestra comunidad, que va más allá para ayudar a otros que lo necesitan. Es honesto y confiable — un esposo y padre amoroso, así como un hombre increíblemente trabajador.",
       author: "A Long Island Business Owner & Community Member"
     },
     {
-      quote: "Marvin has an infectious personality and brings positivity to those around him. I have seen Marvin raise his children and support his wife with dedication and integrity. He is always willing to lend a helping hand and be there for others in his community.",
+      en: "Marvin has an infectious personality and brings positivity to those around him. I have seen Marvin raise his children and support his wife with dedication and integrity. He is always willing to lend a helping hand and be there for others in his community.",
+      es: "Marvin tiene una personalidad contagiosa y aporta positividad a quienes lo rodean. He visto a Marvin criar a sus hijos y apoyar a su esposa con dedicación e integridad. Siempre está dispuesto a echar una mano y estar ahí para otros en su comunidad.",
       author: "A Licensed Plumbing Contractor, Oyster Bay NY"
     },
     {
-      quote: "Beyond his personal integrity, Marvin is a devoted father, a supportive husband, and loyal to all his friends and coworkers. His commitment to his community is always on display — he is always willing to lend his craft to anyone in need.",
+      en: "Beyond his personal integrity, Marvin is a devoted father, a supportive husband, and loyal to all his friends and coworkers. His commitment to his community is always on display — he is always willing to lend his craft to anyone in need.",
+      es: "Más allá de su integridad personal, Marvin es un padre devoto, un esposo solidario y leal a todos sus amigos y compañeros de trabajo. Su compromiso con su comunidad siempre está presente — siempre está dispuesto a prestar su oficio a cualquiera que lo necesite.",
       author: "A Partner at a Family-Owned GM Dealership, 32 Years in Business"
     },
     {
-      quote: "Marvin is deeply devoted to his wife and children. He takes his responsibilities as a husband and father very seriously and works tirelessly to provide a stable, safe, and loving life for his family. This country needs people like Mr. Ochoa.",
+      en: "Marvin is deeply devoted to his wife and children. He takes his responsibilities as a husband and father very seriously and works tirelessly to provide a stable, safe, and loving life for his family. This country needs people like Mr. Ochoa.",
+      es: "Marvin está profundamente dedicado a su esposa y sus hijos. Se toma muy en serio sus responsabilidades como esposo y padre y trabaja incansablemente para proporcionar una vida estable, segura y amorosa para su familia. Este país necesita personas como el Sr. Ochoa.",
       author: "A Naturalized US Citizen & Homeowner"
     },
     {
-      quote: "I have known Marvin for close to twenty years. He is reliable, dedicated, and meticulous. I have been to his house and met his family and he is nothing less than a wonderful husband and father. I can honestly say that our community is a better place because of him.",
+      en: "I have known Marvin for close to twenty years. He is reliable, dedicated, and meticulous. I have been to his house and met his family and he is nothing less than a wonderful husband and father. I can honestly say that our community is a better place because of him.",
+      es: "Conozco a Marvin desde hace casi veinte años. Es confiable, dedicado y meticuloso. He estado en su casa y conocí a su familia, y no es menos que un esposo y padre maravilloso. Puedo decir honestamente que nuestra comunidad es un mejor lugar gracias a él.",
       author: "Owner & Operator of an A/C & Heating Corp., 20-Year Acquaintance"
     },
     {
-      quote: "Over the past 10 years, Marvin has never gotten into any arguments or trouble. He consistently demonstrated his ability to be a team player — with experience, leadership, creativity, and resilience. Beyond his impressive skills, he is a person of excellent character.",
+      en: "Over the past 10 years, Marvin has never gotten into any arguments or trouble. He consistently demonstrated his ability to be a team player — with experience, leadership, creativity, and resilience. Beyond his impressive skills, he is a person of excellent character.",
+      es: "Durante los últimos 10 años, Marvin nunca se ha metido en ningún conflicto o problema. Ha demostrado constantemente su capacidad para ser un jugador de equipo — con experiencia, liderazgo, creatividad y resistencia. Más allá de sus impresionantes habilidades, es una persona de excelente carácter.",
       author: "President of a Long Island Soccer League"
     },
     {
-      quote: "Over the years Marvin and I became very good friends. I can tell you — as good a person he is at work, he is 100x better at home as a family man and friend. I have never once seen Marvin do anything offensive, illegal, or inhumane.",
+      en: "Over the years Marvin and I became very good friends. I can tell you — as good a person he is at work, he is 100x better at home as a family man and friend. I have never once seen Marvin do anything offensive, illegal, or inhumane.",
+      es: "A lo largo de los años, Marvin y yo nos hicimos muy buenos amigos. Puedo decirte que, por buena persona que es en el trabajo, es 100 veces mejor en casa como hombre de familia y amigo. Nunca he visto a Marvin hacer nada ofensivo, ilegal o inhumano.",
       author: "An Electrical Contractor, Business Owner Since 2003"
     },
     {
-      quote: "During my time interacting with Marvin, he consistently showed his dedication to providing excellent customer service. He was hardworking, consistently gave his highest effort, and produced high quality work.",
+      en: "During my time interacting with Marvin, he consistently showed his dedication to providing excellent customer service. He was hardworking, consistently gave his highest effort, and produced high quality work.",
+      es: "Durante mi tiempo interactuando con Marvin, él mostró constantemente su dedicación a brindar un excelente servicio al cliente. Era trabajador, siempre daba su máximo esfuerzo y producía trabajo de alta calidad.",
       author: "A Carpentry Customer"
     },
     {
-      quote: "What stands out most is how consistently Marvin shows up for the people in his life. He is reliable, caring, empathetic, and takes his responsibilities seriously — qualities he demonstrates through his actions every day.",
+      en: "What stands out most is how consistently Marvin shows up for the people in his life. He is reliable, caring, empathetic, and takes his responsibilities seriously — qualities he demonstrates through his actions every day.",
+      es: "Lo que más destaca es lo consistentemente que Marvin se presenta para las personas en su vida. Es confiable, atento, empático y se toma sus responsabilidades en serio — cualidades que demuestra a través de sus acciones todos los días.",
       author: "A Licensed Clinical Social Worker & Therapist"
     },
     {
-      quote: "Marvin is a man of strong moral character, integrity, and deep commitment to his family, work, and community. As a father, he is attentive, loving, and deeply involved in his children's lives. As a husband, he is supportive, respectful, and devoted.",
+      en: "Marvin is a man of strong moral character, integrity, and deep commitment to his family, work, and community. As a father, he is attentive, loving, and deeply involved in his children's lives. As a husband, he is supportive, respectful, and devoted.",
+      es: "Marvin es un hombre de fuerte carácter moral, integridad y profundo compromiso con su familia, trabajo y comunidad. Como padre, es atento, amoroso y profundamente involucrado en la vida de sus hijos. Como esposo, es solidario, respetuoso y devoto.",
       author: "Owner of a Kitchen & Bath Design Company, 12-Year Acquaintance"
     },
     {
-      quote: "Marvin is an exemplary member of our community who consistently demonstrates integrity, kindness, and a strong sense of responsibility. He is a respectful and devoted husband and a caring father who prioritizes the well-being of his family.",
+      en: "Marvin is an exemplary member of our community who consistently demonstrates integrity, kindness, and a strong sense of responsibility. He is a respectful and devoted husband and a caring father who prioritizes the well-being of his family.",
+      es: "Marvin es un miembro ejemplar de nuestra comunidad que demuestra constantemente integridad, amabilidad y un fuerte sentido de responsabilidad. Es un esposo respetuoso y devoto, y un padre cariñoso que prioriza el bienestar de su familia.",
       author: "A Retired 37-Year MTA Employee & Homeowner"
     },
     {
-      quote: "The embodiment of values has always been something that draws me towards or away from people. In Marvin's case, it has drawn me closer to him and fostered a deep admiration for the many strong values he exhibits — sincerity, resilience, generosity, helpfulness, and diligence.",
+      en: "The embodiment of values has always been something that draws me towards or away from people. In Marvin's case, it has drawn me closer to him and fostered a deep admiration for the many strong values he exhibits — sincerity, resilience, generosity, helpfulness, and diligence.",
+      es: "La encarnación de valores siempre ha sido algo que me atrae o aleja de las personas. En el caso de Marvin, me ha acercado a él y ha fomentado una profunda admiración por los muchos valores fuertes que exhibe — sinceridad, resistencia, generosidad, amabilidad y diligencia.",
       author: "Marvin's Sister-In-Law, Known for 19 Years"
     },
     {
-      quote: "Marvin took time away from his weekend and his family to help construct my home — just to help me out during a rough time when my father was dying. He is an incredibly compassionate human who gave of himself to help a friend.",
+      en: "Marvin took time away from his weekend and his family to help construct my home — just to help me out during a rough time when my father was dying. He is an incredibly compassionate human who gave of himself to help a friend.",
+      es: "Marvin tomó tiempo de su fin de semana y de su familia para ayudar a construir mi casa — solo para ayudarme durante un momento difícil cuando mi padre estaba muriendo. Es un ser humano increíblemente compasivo que se entregó para ayudar a un amigo.",
       author: "A Senior Production Manager, Neighbor & Friend"
     },
     {
-      quote: "Of all the men I have worked with, Marvin stands out as one of the best. He is one of the hardest, most honest, and dedicated men to work with. He may not have been born in the USA, but with all his love and contribution to his family and society, I cannot think of anyone more deserving to become a citizen.",
+      en: "Of all the men I have worked with, Marvin stands out as one of the best. He is one of the hardest, most honest, and dedicated men to work with. He may not have been born in the USA, but with all his love and contribution to his family and society, I cannot think of anyone more deserving to become a citizen.",
+      es: "De todos los hombres con los que he trabajado, Marvin se destaca como uno de los mejores. Es uno de los hombres más trabajadores, honestos y dedicados con los que he trabajado. Puede que no haya nacido en los EE. UU., pero con todo su amor y contribución a su familia y la sociedad, no puedo pensar en nadie más merecedor de convertirse en ciudadano.",
       author: "A Long-Time Colleague & Co-Worker"
     },
     {
-      quote: "Marvin works hard to provide for his family and serves as a steady, reliable presence in their lives. He is a loyal friend — someone who can be counted on in times of need — and a respectful, contributing member of the community.",
+      en: "Marvin works hard to provide for his family and serves as a steady, reliable presence in their lives. He is a loyal friend — someone who can be counted on in times of need — and a respectful, contributing member of the community.",
+      es: "Marvin trabaja duro para mantener a su familia y sirve como una presencia constante y confiable en sus vidas. Es un amigo leal — alguien con quien se puede contar en momentos de necesidad — y un miembro respetuoso y contribuyente de la comunidad.",
       author: "A New York Resident & Community Member"
     },
     {
-      quote: "I had the opportunity to get to know Marvin professionally and he was incredibly hardworking, respectful, and diligent in his work. He was always on time, communicative, reliable, and efficient.",
+      en: "I had the opportunity to get to know Marvin professionally and he was incredibly hardworking, respectful, and diligent in his work. He was always on time, communicative, reliable, and efficient.",
+      es: "Tuve la oportunidad de conocer a Marvin profesionalmente y fue increíblemente trabajador, respetuoso y diligente en su trabajo. Siempre fue puntual, comunicativo, confiable y eficiente.",
       author: "A Carpentry Customer"
     },
     {
-      quote: "On job sites, you quickly learn who you can rely on — and Marvin has always been one of those people. He treats others with respect, takes initiative without being asked, and carries himself in a way that reflects strong character.",
+      en: "On job sites, you quickly learn who you can rely on — and Marvin has always been one of those people. He treats others with respect, takes initiative without being asked, and carries himself in a way that reflects strong character.",
+      es: "En los sitios de trabajo, rápidamente aprendes en quién puedes confiar — y Marvin siempre ha sido una de esas personas. Trata a los demás con respeto, toma la iniciativa sin que se lo pidan y se comporta de una manera que refleja un carácter fuerte.",
       author: "A Licensed Electrician & 12-Year Acquaintance"
     }
   ];
@@ -1806,9 +1830,13 @@ Atentamente,
     return shuffled;
   }
 
-  function buildTestimonials() {
+  function buildTestimonials(lang = 'en') {
     const track = document.getElementById('testimonialTrack');
     const indicators = document.getElementById('carouselIndicators');
+    
+    // Clear existing content
+    track.innerHTML = '';
+    indicators.innerHTML = '';
     
     // Shuffle testimonials
     shuffledTestimonials = shuffleArray(testimonials);
@@ -1818,7 +1846,7 @@ Atentamente,
       const card = document.createElement('div');
       card.className = 'testimonial-card' + (index === 0 ? ' active' : '');
       card.innerHTML = `
-        <div class="testimonial-quote">${testimonial.quote}</div>
+        <div class="testimonial-quote">${testimonial[lang]}</div>
         <div class="testimonial-author">${testimonial.author}</div>
       `;
       track.appendChild(card);
@@ -1829,6 +1857,9 @@ Atentamente,
       dot.onclick = () => goToTestimonial(index);
       indicators.appendChild(dot);
     });
+    
+    // Reset to first testimonial
+    currentTestimonialIndex = 0;
   }
 
   function updateCarousel() {
@@ -1860,7 +1891,7 @@ Atentamente,
   }
 
   // Initialize testimonials
-  buildTestimonials();
+  buildTestimonials(currentLang);
 
   // Auto-advance every 9.6 seconds
   setInterval(nextTestimonial, 9600);
